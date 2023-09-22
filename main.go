@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"yusufwdn/golang-restful-api/app"
 	"yusufwdn/golang-restful-api/controller"
+	"yusufwdn/golang-restful-api/exception"
 	"yusufwdn/golang-restful-api/helper"
 	"yusufwdn/golang-restful-api/repository"
 	"yusufwdn/golang-restful-api/service"
@@ -29,6 +30,8 @@ func main() {
 	router.POST("/api/categories", categoryController.Create)
 	router.PUT("/api/categories/:categoryId", categoryController.Update)
 	router.DELETE("/api/categories/:categoryId", categoryController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr:    "localhost:3000",
