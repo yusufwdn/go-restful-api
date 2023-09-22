@@ -6,6 +6,7 @@ import (
 	"yusufwdn/golang-restful-api/controller"
 	"yusufwdn/golang-restful-api/exception"
 	"yusufwdn/golang-restful-api/helper"
+	"yusufwdn/golang-restful-api/middleware"
 	"yusufwdn/golang-restful-api/repository"
 	"yusufwdn/golang-restful-api/service"
 
@@ -35,7 +36,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()
